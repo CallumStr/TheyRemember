@@ -5,15 +5,19 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float groundDist;
     public LayerMask terrainLayer;
-    public Rigidbody rb;
+    public CharacterController characterController;
     public SpriteRenderer sr;
 
     private Animator animator;
 
+    // Slope variables
+    public float slopeForce = 10f;
+    public float slopeRayLength = 1.5f;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
@@ -43,10 +47,25 @@ public class PlayerController : MonoBehaviour
         // Check if moving backward (negatively on the Z-axis)
         bool movingBackward = z < 0;
 
-        Vector3 moveDir = new Vector3(x, 0, z);
-        rb.velocity = moveDir * speed;
+        Vector3 moveDir = new Vector3(x, 0, z).normalized;
 
-        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+        // Cast a ray to check the ground slope
+        RaycastHit slopeHit;
+        Physics.Raycast(transform.position, -transform.up, out slopeHit, Mathf.Infinity, terrainLayer);
+
+        // If on a slope, adjust the player's movement based on the slope angle
+        if (slopeHit.collider != null && slopeHit.normal != Vector3.up)
+        {
+            float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
+
+            // Apply consistent downward force to move downwards on slopes
+            Vector3 slopeMove = Vector3.down * slopeForce;
+            characterController.Move(slopeMove * Time.deltaTime);
+        }
+
+        characterController.Move(moveDir * speed * Time.deltaTime);
+
+        animator.SetFloat("Speed", Mathf.Abs(characterController.velocity.x));
 
         // Flip the sprite when moving left
         if (x < 0)
