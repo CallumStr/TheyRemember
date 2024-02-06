@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -6,6 +7,12 @@ public class PauseMenu : MonoBehaviour
     public KeyCode pauseKey = KeyCode.Escape;
 
     private bool isPaused = false;
+
+    void Start()
+    {
+        // Ensure the pause menu is initially closed
+        pauseMenuUI.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -43,5 +50,11 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Quitting the game!"); // Optionally, log a message to the console
         Application.Quit(); // Quit the game
+    }
+
+    public void MainMenu()
+    {
+        // Change the scene to the main menu scene
+        SceneManager.LoadScene(0);
     }
 }

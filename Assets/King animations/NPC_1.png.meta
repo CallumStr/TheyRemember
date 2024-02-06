@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c18b5b5bd974cae45b1d3c9e565f271b
+guid: 1c202800272b13b43afeee77dab8229f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,85 +110,211 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walk_back_0
+      name: NPC_1_0
       rect:
         serializedVersion: 2
-        x: 87
-        y: 241
-        width: 26
-        height: 79
+        x: 89
+        y: 443
+        width: 32
+        height: 78
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b9712f7f58e81443b49eb991c89ac4b
-      internalID: 1813606791
+      spriteID: 1d220b59b2dcef546b6cbc9a1180af11
+      internalID: 613531769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk_back_1
+      name: NPC_1_1
       rect:
         serializedVersion: 2
-        x: 287
-        y: 242
-        width: 26
+        x: 289
+        y: 443
+        width: 32
         height: 77
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9dea654b0e239ac41b8a9294d05316b4
-      internalID: -811616803
+      spriteID: 7c79ebd1607b4d843b0397f7f309fc1c
+      internalID: 694638717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk_back_2
+      name: NPC_1_2
       rect:
         serializedVersion: 2
-        x: 87
-        y: 40
-        width: 26
-        height: 80
+        x: 489
+        y: 443
+        width: 32
+        height: 76
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc770bb26b2109c42bab6f61e3c6ff32
-      internalID: -798005970
+      spriteID: 2ffedac1e33797c4c9e5b160ac8ef5f7
+      internalID: -365465390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk_back_3
+      name: NPC_1_3
       rect:
         serializedVersion: 2
-        x: 287
-        y: 40
-        width: 26
-        height: 79
+        x: 689
+        y: 443
+        width: 32
+        height: 77
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ffd35c8c7786414898dac5f9bcdbf20
-      internalID: -1002950963
+      spriteID: edea3e732c170784d9a8995f3c90f9b0
+      internalID: 580475222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_1_4
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 243
+        width: 32
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53789b87b350e5042b67af473dd16704
+      internalID: -261281117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_1_5
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 243
+        width: 32
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f46745553c961504faee6dbb26bf0564
+      internalID: 1677341633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_1_6
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 243
+        width: 32
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a672fcfce850304e91d9e3e970d2eda
+      internalID: 405219385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_1_7
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 243
+        width: 33
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e53d74f146af6341a3d42cd2be45495
+      internalID: 1026156974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_1_8
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 43
+        width: 32
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df92cbb371109404ab8fedaf481c7dd6
+      internalID: -529588136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_1_9
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 43
+        width: 32
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c3e956e410a91b4d90854fdcbc05435
+      internalID: -1555971324
       vertices: []
       indices: 
       edges: []
@@ -204,10 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      walk_back_0: 1813606791
-      walk_back_1: -811616803
-      walk_back_2: -798005970
-      walk_back_3: -1002950963
+      NPC_1_0: 613531769
+      NPC_1_1: 694638717
+      NPC_1_2: -365465390
+      NPC_1_3: 580475222
+      NPC_1_4: -261281117
+      NPC_1_5: 1677341633
+      NPC_1_6: 405219385
+      NPC_1_7: 1026156974
+      NPC_1_8: -529588136
+      NPC_1_9: -1555971324
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
