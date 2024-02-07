@@ -1,18 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NPC : MonoBehaviour
 {
     public GameObject dialoguePanel;
     public Text dialogueText;
-    public string[] dialogue;
-    private int index;
+    
+    // Dialogue arrays for each NPC
+    private Dictionary<string, string[]> npcDialogues = new Dictionary<string, string[]>();
 
     public GameObject contButton;
-
     public float wordSpeed;
     public bool playerIsClose;
+
+    // Reference to the current NPC
+    private static NPC currentNPC;
+
+    // Dictionary to store the dialogue index for each NPC instance
+    private Dictionary<string, int> dialogueIndices = new Dictionary<string, int>();
+
+    void Start()
+    {
+        // Assign dialogues for each NPC
+        AssignNPCDialogues();
+
+        // Set initial dialogue index for this NPC instance
+        dialogueIndices[gameObject.name] = 0;
+    }
 
     void Update()
     {
@@ -25,29 +41,52 @@ public class NPC : MonoBehaviour
             else
             {
                 dialoguePanel.SetActive(true);
+                currentNPC = this;
                 StartCoroutine(Typing());
             }
         }
 
-        if(dialogueText.text== dialogue[index])
+        if (dialogueText.text == npcDialogues[gameObject.name][dialogueIndices[gameObject.name]])
         {
             contButton.SetActive(true);
         }
+    }
 
-
-
+    void AssignNPCDialogues()
+    {
+        // Assign dialogues for each NPC by name
+        if (gameObject.name == "NPC1")
+        {
+            npcDialogues["NPC1"] = new string[] 
+            {
+                "First dialogue line for NPC 1",
+                "pog",
+                // Add more lines as needed
+            };
+        }
+        else if (gameObject.name == "NPC2")
+        {
+            npcDialogues["NPC2"] = new string[] 
+            {
+                "First dialogue line for NPC 2",
+                "Second dialogue line for NPC 2",
+                // Add more lines as needed
+            };
+        }
+        // Add more NPCs as needed
     }
 
     public void zeroText()
     {
         dialogueText.text = "";
-        index = 0;
+        dialogueIndices[gameObject.name] = 0;
         dialoguePanel.SetActive(false);
     }
 
     IEnumerator Typing()
     {
-        foreach (char letter in dialogue[index].ToCharArray())
+        int index = dialogueIndices[gameObject.name];
+        foreach (char letter in npcDialogues[gameObject.name][index].ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
@@ -58,9 +97,10 @@ public class NPC : MonoBehaviour
     {
         contButton.SetActive(false);
 
-        if (index < dialogue.Length - 1)
+        int index = dialogueIndices[gameObject.name];
+        if (index < npcDialogues[gameObject.name].Length - 1)
         {
-            index++;
+            dialogueIndices[gameObject.name]++;
             dialogueText.text = "";
             StartCoroutine(Typing());
         }
@@ -84,6 +124,15 @@ public class NPC : MonoBehaviour
         {
             playerIsClose = false;
             zeroText();
+        }
+    }
+
+    // Method to continue the dialogue when the continue button is pressed
+    public static void ContinueDialogue()
+    {
+        if (currentNPC != null)
+        {
+            currentNPC.NextLine();
         }
     }
 }
