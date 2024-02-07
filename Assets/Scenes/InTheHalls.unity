@@ -510,8 +510,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 894058496}
   dialogueText: {fileID: 16822792}
-  dialogue:
-  - Hello dear
   contButton: {fileID: 1965212647}
   wordSpeed: 0.06
   playerIsClose: 0
@@ -1567,17 +1565,17 @@ PrefabInstance:
     - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.79
+      value: -5.78
       objectReference: {fileID: 0}
     - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.62
+      value: 34.14
       objectReference: {fileID: 0}
     - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
         type: 3}
@@ -3698,7 +3696,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 1156490011}
   dialogueText: {fileID: 1861089145}
-  dialogue: []
   contButton: {fileID: 29367286}
   wordSpeed: 0.06
   playerIsClose: 0
