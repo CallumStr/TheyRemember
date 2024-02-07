@@ -1556,6 +1556,87 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &544508038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1946204539}
+    m_Modifications:
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 34.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9930695
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0066490895
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.11732853
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0016512297
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.734
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -13.478
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.277
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194491082694692851, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894376441886534163, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7894376441886534163, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1374521392}
+    - targetCorrespondingSourceObject: {fileID: 7894376441886534163, guid: 9b6503a8447960c4dbf8b74661fd7415,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1374521391}
+  m_SourcePrefab: {fileID: 100100000, guid: 9b6503a8447960c4dbf8b74661fd7415, type: 3}
 --- !u!1 &551015835
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,6 +4439,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369196590}
   m_CullTransparentMesh: 1
+--- !u!1 &1374521389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7894376441886534163, guid: 9b6503a8447960c4dbf8b74661fd7415,
+    type: 3}
+  m_PrefabInstance: {fileID: 544508038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1374521390 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1458919451865832899, guid: 9b6503a8447960c4dbf8b74661fd7415,
+    type: 3}
+  m_PrefabInstance: {fileID: 544508038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1374521391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374521389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc7f6da297c4781429d8a3e71a08a2cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 1039045594}
+  dialogueText: {fileID: 1743276521}
+  contButton: {fileID: 1648809741}
+  wordSpeed: 0.06
+  playerIsClose: 0
+--- !u!65 &1374521392
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374521389}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.59, y: 0.7799999, z: 1.1}
+  m_Center: {x: 0.00000011920929, y: -0.000000029802322, z: 0.00000047683716}
 --- !u!1001 &1409038967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5269,7 +5400,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1812278825}
         m_TargetAssemblyTypeName: NPC, Assembly-CSharp
-        m_MethodName: NextLine
+        m_MethodName: ContinueDialogue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5698,9 +5829,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 1039045594}
   dialogueText: {fileID: 1743276521}
-  dialogue:
-  - pog gamer man
-  - I've made the dialogue system Wahooooo!
   contButton: {fileID: 1648809741}
   wordSpeed: 0.06
   playerIsClose: 0
@@ -5940,6 +6068,7 @@ Transform:
   m_Children:
   - {fileID: 606101342}
   - {fileID: 127001406}
+  - {fileID: 1374521390}
   - {fileID: 374104276}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6406,7 +6535,7 @@ PrefabInstance:
     - target: {fileID: 7894376441886534163, guid: 9b6503a8447960c4dbf8b74661fd7415,
         type: 3}
       propertyPath: m_Name
-      value: NPC
+      value: NPC1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
