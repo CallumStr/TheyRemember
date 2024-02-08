@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4266589995204330215}
   - component: {fileID: 3907905729855611062}
   - component: {fileID: 9198346293935048401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7201940222049017304}
   - component: {fileID: 7870384191369887014}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,9 +193,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7632880659631167754}
-  m_Layer: 0
-  m_Name: PlayerStuff
-  m_TagString: Untagged
+  m_Layer: 6
+  m_Name: King
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 1600512513188117707}
   - component: {fileID: 8004249453284590491}
   - component: {fileID: 826661977212146288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,6 +404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185363778720617127, guid: f173528183fa2334f951292832768a6a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
