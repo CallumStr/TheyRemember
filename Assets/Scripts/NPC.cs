@@ -7,7 +7,9 @@ public class NPC : MonoBehaviour
 {
     public GameObject dialoguePanel;
     public Text dialogueText;
-    
+
+    private Coroutine typingCoroutine; // creates reference for coroutine so that we can manage its usage better
+
     // Dialogue arrays for each NPC
     private Dictionary<string, string[]> npcDialogues = new Dictionary<string, string[]>();
 
@@ -42,7 +44,9 @@ public class NPC : MonoBehaviour
             {
                 dialoguePanel.SetActive(true);
                 currentNPC = this;
-                StartCoroutine(Typing());
+                AssignNPCDialogues();//updates the class so the index value is different each time the player interacts with the NPC
+                // StartCoroutine(Typing());
+                typingCoroutine = StartCoroutine(Typing()); // resets the coroutine and stores reference
             }
         }
 
@@ -57,30 +61,78 @@ public class NPC : MonoBehaviour
         // Assign dialogues for each NPC by name
         if (gameObject.name == "NPC1")
         {
-            npcDialogues["NPC1"] = new string[] 
+            int randomIndex = UnityEngine.Random.Range(0, 2);//Creates a index with the possiblities equaling the amount of diagloue lines
+            if (randomIndex == 0)
             {
-                "First dialogue line for NPC 1",
-                "pog",
-                // Add more lines as needed
-            };
+                npcDialogues["NPC1"] = new string[]
+                {
+                    "Glory to the Crown!",
+                };
+            }
+            else
+            {
+                npcDialogues["NPC1"] = new string[]
+                {
+                    "None may stand against Rúinhaven!",
+                };
+            }
         }
-        else if (gameObject.name == "NPC2")
+
+        if (gameObject.name == "NPC2")
         {
-            npcDialogues["NPC2"] = new string[] 
+            int randomIndex = UnityEngine.Random.Range(0, 2);
+            if (randomIndex == 0)
             {
-                "First dialogue line for NPC 2",
-                "Second dialogue line for NPC 2",
-                // Add more lines as needed
-            };
+                npcDialogues["NPC2"] = new string[]
+                {
+                    "God be with you Your Majesty",
+                };
+            }
+            else //if (randomIndex == 1) only use if the random index range goes above 2
+            {
+                npcDialogues["NPC2"] = new string[]
+                {
+                    "Your Highness, I think your consort is looking for you",
+                };
+            }
+            //else
+            //{
+               // npcDialogues["NPC2"] = new string[] //the text was scrolling too slowly
+               // {
+                    //"With all the lands in Rúinhaven secured we may now begin to bring order to a restless people",
+               // };
+            //}
         }
-        // Add more NPCs as needed
+        if (gameObject.name == "NPC3")
+        {
+            int randomIndex = UnityEngine.Random.Range(0, 2);//Creates a index with the possiblities equaling the amount of diagloue lines
+            if (randomIndex == 0)
+            {
+                npcDialogues["NPC3"] = new string[]
+                {
+                    "No wine...",
+                    "Guess beer will have to do!",
+                };
+            }
+            else
+            {
+                npcDialogues["NPC3"] = new string[]
+                {
+                    "Cheers!",
+                };
+            }
+        }
     }
 
-    public void zeroText()
+        public void zeroText()
     {
         dialogueText.text = "";
         dialogueIndices[gameObject.name] = 0;
         dialoguePanel.SetActive(false);
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine); //Stops the coroutine from running to avoid overflow
+        }
     }
 
     IEnumerator Typing()
@@ -102,7 +154,11 @@ public class NPC : MonoBehaviour
         {
             dialogueIndices[gameObject.name]++;
             dialogueText.text = "";
-            StartCoroutine(Typing());
+            if (typingCoroutine != null)//Stops the coroutine from running to avoid overflow
+            {
+                StopCoroutine(typingCoroutine);
+            }
+            typingCoroutine = StartCoroutine(Typing());// resets the coroutine and stores reference
         }
         else
         {
