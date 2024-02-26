@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b102f1b6c7c108545bfa2c213e0b4331
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - King: {fileID: 5281945897005399315, guid: cf3af612572ee1f42b3b961cedc99a2f, type: 3}
+  - Queen: {fileID: 7795861022866448431, guid: 67f2657232a18ad40bb49ab28237b6b5, type: 3}
+  - spawnPoint: {fileID: 5757664305101742523, guid: 8a47ccec323b4e649a4db38f9bb95b50,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
