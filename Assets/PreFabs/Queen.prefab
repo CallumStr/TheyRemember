@@ -246,7 +246,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 613531769, guid: 1c202800272b13b43afeee77dab8229f,
+      objectReference: {fileID: 127393994, guid: e51566ba0c9fd7b4a918748c1cd2f57a,
         type: 3}
     - target: {fileID: 137978165712489497, guid: f173528183fa2334f951292832768a6a,
         type: 3}
@@ -344,11 +344,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5185363778720617127, guid: f173528183fa2334f951292832768a6a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6875032219396082138, guid: f173528183fa2334f951292832768a6a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6875032219396082138, guid: f173528183fa2334f951292832768a6a,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a808437b3cb51874b9615fc5176af799, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -506,7 +516,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
