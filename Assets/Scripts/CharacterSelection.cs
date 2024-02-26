@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine; // Make sure to include the Cinemachine namespace
 
 public class CharacterSelection : MonoBehaviour
 {
+    public static int selectedCharacterIndex = -1; 
     public GameObject King;
     public GameObject Queen;
     public Transform spawnPoint;
@@ -11,39 +13,48 @@ public class CharacterSelection : MonoBehaviour
     public void SelectCharacter(int characterIndex)
     {
         Debug.Log("Selecting character: " + characterIndex);
+        selectedCharacterIndex = characterIndex;
 
-        // Destroy the previous character if it exists
         if (selectedCharacter != null)
             Destroy(selectedCharacter);
 
-        // Instantiate the chosen character at the specified spawn point
+        GameObject prefabToInstantiate = null;
         switch (characterIndex)
         {
             case 0:
-                if (King != null)
-                {
-                    Debug.Log("Instantiating King at position: " + spawnPoint.position);
-                    selectedCharacter = Instantiate(King, spawnPoint.position, Quaternion.identity);
-                }
-                else
-                {
-                    Debug.LogError("King prefab is not assigned.");
-                }
+                prefabToInstantiate = King;
                 break;
             case 1:
-                if (Queen != null)
-                {
-                    Debug.Log("Instantiating Queen at position: " + spawnPoint.position);
-                    selectedCharacter = Instantiate(Queen, spawnPoint.position, Quaternion.identity);
-                }
-                else
-                {
-                    Debug.LogError("Queen prefab is not assigned.");
-                }
+                prefabToInstantiate = Queen;
                 break;
             default:
                 Debug.LogError("Invalid character index");
-                break;
+                return;
+        }
+
+        if (prefabToInstantiate != null)
+        {
+            selectedCharacter = Instantiate(prefabToInstantiate, spawnPoint.position, Quaternion.identity);
+            // After instantiation, try to find the Cinemachine Virtual Camera in the instantiated character
+            CinemachineVirtualCamera characterCamera = selectedCharacter.GetComponentInChildren<CinemachineVirtualCamera>();
+            if (characterCamera != null)
+            {
+                // If the camera is found, activate it or ensure it's set up correctly
+                characterCamera.gameObject.SetActive(true); // Make sure the camera is active
+                characterCamera.Follow = selectedCharacter.transform;
+                characterCamera.LookAt = selectedCharacter.transform;
+
+                // Adjust the virtual camera's priority if necessary
+                characterCamera.Priority = 10;
+            }
+            else
+            {
+                Debug.LogError("No Cinemachine Virtual Camera found on the selected character prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"{(characterIndex == 0 ? "King" : "Queen")} prefab is not assigned.");
         }
     }
 
