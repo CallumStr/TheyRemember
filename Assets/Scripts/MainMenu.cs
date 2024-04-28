@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayButton : MonoBehaviour
 {
     // Function to handle the click event of the play button
+
     public void PlayGame()
     {
         LoadNextScene();
@@ -22,3 +23,4 @@ public class PlayButton : MonoBehaviour
         Application.Quit();
     }
 }
+

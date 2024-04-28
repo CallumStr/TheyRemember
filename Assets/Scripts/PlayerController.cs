@@ -8,11 +8,26 @@ public class PlayerController : MonoBehaviour
     public CharacterController characterController;
     public SpriteRenderer sr;
 
+    public static PlayerController instance;
+
     private Animator animator;
 
     // Slope variables
     public float slopeForce = 10f;
     public float slopeRayLength = 1.5f;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
