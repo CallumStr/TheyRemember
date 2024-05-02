@@ -46,6 +46,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
+
     public void QuitGame()
     {
         Debug.Log("Quitting the game!"); // Optionally, log a message to the console
