@@ -13,6 +13,23 @@ public class HotbarSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (tooltipText != null)
             tooltipText.gameObject.SetActive(false); // Ensure tooltip is initially hidden
+
+        DontDestroyOnLoad(gameObject); // Make the HotbarSlot object persistent
+
+        SetInitialItem(); // Call the method to set the initial item
+    }
+
+    private void SetInitialItem()
+    {
+        // Check if the associated item exists in the player's inventory
+        if (playerInventory != null && playerInventory.HasItem(associatedItem))
+        {
+            SetItem(associatedItem); // Set the initial item if it exists in the inventory
+        }
+        else
+        {
+            icon.enabled = false; // Hide the icon if the item is not in the inventory
+        }
     }
 
     public void SetItem(KeyItem item)
@@ -31,9 +48,9 @@ public class HotbarSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (associatedItem != null && tooltipText != null && playerInventory != null)
+        if (associatedItem != null && tooltipText != null && Inventory.instance != null)
         {
-            if (playerInventory.HasItem(associatedItem))
+            if (Inventory.instance.HasItem(associatedItem))
             {
                 // Correct reference to 'description' instead of 'itemDescription'
                 tooltipText.text = $"{associatedItem.itemName}\n{associatedItem.description}";

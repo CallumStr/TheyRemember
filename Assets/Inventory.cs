@@ -1,16 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;  // This namespace is required to use TMP_Text
+using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-    private List<KeyItem> keyItems = new List<KeyItem>();
-    private List<KeyItem> hotbarItems = new List<KeyItem>(); // List to store items in the hotbar
+    public static Inventory instance; // Singleton instance
+
+    // Make keyItems accessible by other scripts
+    public List<KeyItem> keyItems = new List<KeyItem>(); 
+
+    private List<KeyItem> hotbarItems = new List<KeyItem>(); 
     public TMP_Text inventoryText;
     public TMP_Text hotbarText;
-    public int hotbarSize = 5; // Size of the hotbar
+    public int hotbarSize = 5; 
 
-    // Method to add a key item to the inventory
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this; // Set the instance to this object if it doesn't exist
+            DontDestroyOnLoad(gameObject); // Make the object persist between scenes
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+    }
+
     public void AddKeyItem(KeyItem item)
     {
         if (!keyItems.Contains(item))
@@ -20,7 +36,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    // Method to remove a key item from the inventory
     public void RemoveKeyItem(KeyItem item)
     {
         if (keyItems.Remove(item))
@@ -29,27 +44,49 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    // Method to check if the inventory contains a specific item
     public bool HasItem(KeyItem item)
     {
         return keyItems.Contains(item);
     }
 
+    public void AddToHotbar(KeyItem item)
+    {
+        if (hotbarItems.Count < hotbarSize && !hotbarItems.Contains(item))
+        {
+            hotbarItems.Add(item);
+            UpdateHotbarText();
+        }
+    }
+
+    public void RemoveFromHotbar(KeyItem item)
+    {
+        if (hotbarItems.Remove(item))
+        {
+            UpdateHotbarText();
+        }
+    }
+
     private void UpdateInventoryText()
     {
-        inventoryText.text = "Inventory:\n";
-        foreach (KeyItem item in keyItems)
+        if (inventoryText != null) // Check if inventory text is assigned
         {
-            inventoryText.text += "- " + item.itemName + "\n";
+            inventoryText.text = "Inventory:\n";
+            foreach (KeyItem item in keyItems)
+            {
+                inventoryText.text += "- " + item.itemName + "\n";
+            }
         }
     }
 
     private void UpdateHotbarText()
     {
-        hotbarText.text = "Hotbar:\n";
-        foreach (KeyItem item in hotbarItems)
+        if (hotbarText != null) // Check if hotbar text is assigned
         {
-            hotbarText.text += "- " + item.itemName + "\n";
+            hotbarText.text = "Hotbar:\n";
+            foreach (KeyItem item in hotbarItems)
+            {
+                hotbarText.text += "- " + item.itemName + "\n";
+            }
         }
     }
 }
