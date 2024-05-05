@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1258826072435344358}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17362186, y: -0.02078791, z: 0.003682102, w: 0.9845861}
-  m_LocalPosition: {x: 0.056651972, y: 0.48863488, z: -1.3412093}
+  m_LocalPosition: {x: 0.05665194, y: 0.48863488, z: -1.3412093}
   m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 0.14285713}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -227,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 7795861022866448431}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.08234549, z: -0, w: 0.99660385}
-  m_LocalPosition: {x: 6.8009586, y: 9.371, z: 14.094774}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -387,6 +387,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8961319647019932662}
+    - targetCorrespondingSourceObject: {fileID: 5185363778720617127, guid: f173528183fa2334f951292832768a6a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6767521592223360886}
   m_SourcePrefab: {fileID: 100100000, guid: f173528183fa2334f951292832768a6a, type: 3}
 --- !u!4 &432509184595560321 stripped
 Transform:
@@ -473,8 +477,9 @@ MonoBehaviour:
     m_Bits: 0
   characterController: {fileID: 9093743788425943847}
   sr: {fileID: 4166624097597926110}
+  gravity: -9.81
   slopeForce: 5
-  slopeRayLength: 1.5
+  slopeForceRayLength: 1.5
 --- !u!143 &9093743788425943847
 CharacterController:
   m_ObjectHideFlags: 0
@@ -496,7 +501,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 0.71999997
   m_Radius: 0.20000012
-  m_SlopeLimit: 45
+  m_SlopeLimit: 85.75
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -524,3 +529,18 @@ CapsuleCollider:
   m_Height: 0.7799999
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0.000000059604645, z: -0.00000011920929}
+--- !u!114 &6767521592223360886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209575371630212192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316c9cc88fa817c4c9a7af17d804983e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryText: {fileID: 0}
+  hotbarText: {fileID: 0}
+  hotbarSize: 5
