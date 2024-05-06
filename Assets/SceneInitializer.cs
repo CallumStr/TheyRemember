@@ -27,9 +27,9 @@ public class SceneInitializer : MonoBehaviour
 
         foreach (HotbarSlot slot in hotbarSlots)
         {
-            slot.playerInventory = Inventory.instance;  // Ensure each slot links to the persistent inventory
-            slot.SetInitialItem();
-        }
+        // Update the item display directly
+            slot.UpdateItemDisplay();
+     }
     }
 
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Inventory : MonoBehaviour
 {
@@ -24,7 +23,6 @@ public class Inventory : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
     // Method to add a key item to the inventory
     public void AddKeyItem(KeyItem item)
@@ -54,5 +52,11 @@ public class Inventory : MonoBehaviour
     {
         keyItems.Clear();
         if (OnInventoryChanged != null) OnInventoryChanged.Invoke();
+    }
+
+    // Method to retrieve the list of key items
+    public List<KeyItem> GetKeyItems()
+    {
+        return keyItems;
     }
 }

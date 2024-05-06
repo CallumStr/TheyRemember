@@ -7,18 +7,21 @@ public class PlayerController : MonoBehaviour
     public LayerMask terrainLayer;
     public CharacterController characterController;
     public SpriteRenderer sr;
-    public Inventory inventory; // Reference to the Inventory script
-
-    public float pickupRange = 2f; // Define the pickup range here
 
     private Animator animator;
     public float gravity = -9.81f; // Gravity force
     private Vector3 velocity; // to keep track of gravity over time
 
+    // Reference to the Inventory script
+    private Inventory playerInventory;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
+        // Get the player's inventory instance
+        playerInventory = Inventory.instance;
     }
 
     void Update()
@@ -41,30 +44,22 @@ public class PlayerController : MonoBehaviour
 
         HandleAnimations(move);
 
-        if (Input.GetKeyDown(KeyCode.E))
+        // Log inventory contents when "P" is pressed
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            TryPickupKeyItem();
-        }
-    }
-
-    private void TryPickupKeyItem()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, pickupRange); // Adjust pickupRange as needed
-        foreach (Collider collider in colliders)
-        {
-            KeyItemPickup keyItemPickup = collider.GetComponent<KeyItemPickup>();
-            if (keyItemPickup != null && keyItemPickup.canPickup)
+            if (playerInventory != null)
             {
-                // Add the key item to the player's inventory
-                inventory.AddKeyItem(keyItemPickup.keyItem);
-                // Deactivate the key item GameObject after picking it up
-                keyItemPickup.gameObject.SetActive(false);
-                // Update hotbar display after picking up the key item (if needed)
-                // ...
-
-                Debug.Log("Key item picked up.");
+                Debug.Log("Inventory Contents:");
+                foreach (KeyItem item in playerInventory.GetKeyItems())
+                {
+                    Debug.Log(item.itemName);
+                }
             }
-        }
+    else
+    {
+        Debug.LogWarning("Player inventory is null.");
+    }
+}
     }
 
     private void HandleAnimations(Vector3 move)
