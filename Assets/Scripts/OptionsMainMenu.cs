@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class OptionsButton : MonoBehaviour
 {
-    public int optionsSceneIndex = 3;  // scene index for options page
+    public int optionsSceneIndex = 10;  // scene index for options page
     public int defaultSceneIndex = 0;  // default value for scene idex
 
     private static int previousSceneIndex = -1; // Static to persist across scenes
