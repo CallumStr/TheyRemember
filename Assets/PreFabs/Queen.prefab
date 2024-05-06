@@ -387,10 +387,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8961319647019932662}
-    - targetCorrespondingSourceObject: {fileID: 5185363778720617127, guid: f173528183fa2334f951292832768a6a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6767521592223360886}
   m_SourcePrefab: {fileID: 100100000, guid: f173528183fa2334f951292832768a6a, type: 3}
 --- !u!4 &432509184595560321 stripped
 Transform:
@@ -478,8 +474,6 @@ MonoBehaviour:
   characterController: {fileID: 9093743788425943847}
   sr: {fileID: 4166624097597926110}
   gravity: -9.81
-  slopeForce: 5
-  slopeForceRayLength: 1.5
 --- !u!143 &9093743788425943847
 CharacterController:
   m_ObjectHideFlags: 0
@@ -529,18 +523,3 @@ CapsuleCollider:
   m_Height: 0.7799999
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0.000000059604645, z: -0.00000011920929}
---- !u!114 &6767521592223360886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9209575371630212192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316c9cc88fa817c4c9a7af17d804983e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryText: {fileID: 0}
-  hotbarText: {fileID: 0}
-  hotbarSize: 5

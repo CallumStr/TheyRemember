@@ -23,14 +23,13 @@ public class SceneInitializer : MonoBehaviour
     // Initialize the hotbar slots in the current scene
     private void InitializeHotbarSlots()
     {
-        // Find all HotbarSlot objects in the scene
         HotbarSlot[] hotbarSlots = FindObjectsOfType<HotbarSlot>();
 
-        // Loop through each HotbarSlot and update its associated item
         foreach (HotbarSlot slot in hotbarSlots)
         {
-            // Update the slot with the associated item
-            slot.SetItem(slot.associatedItem);
+            slot.playerInventory = Inventory.instance;  // Ensure each slot links to the persistent inventory
+            slot.SetInitialItem();
         }
     }
+
 }

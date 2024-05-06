@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask terrainLayer;
     public CharacterController characterController;
     public SpriteRenderer sr;
+    public Inventory inventory; // Reference to the Inventory script
+
+    public float pickupRange = 2f; // Define the pickup range here
 
     private Animator animator;
     public float gravity = -9.81f; // Gravity force
@@ -37,6 +40,31 @@ public class PlayerController : MonoBehaviour
         characterController.Move((move * speed + new Vector3(0, velocity.y, 0)) * Time.deltaTime); // apply movement + gravity
 
         HandleAnimations(move);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TryPickupKeyItem();
+        }
+    }
+
+    private void TryPickupKeyItem()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, pickupRange); // Adjust pickupRange as needed
+        foreach (Collider collider in colliders)
+        {
+            KeyItemPickup keyItemPickup = collider.GetComponent<KeyItemPickup>();
+            if (keyItemPickup != null && keyItemPickup.canPickup)
+            {
+                // Add the key item to the player's inventory
+                inventory.AddKeyItem(keyItemPickup.keyItem);
+                // Deactivate the key item GameObject after picking it up
+                keyItemPickup.gameObject.SetActive(false);
+                // Update hotbar display after picking up the key item (if needed)
+                // ...
+
+                Debug.Log("Key item picked up.");
+            }
+        }
     }
 
     private void HandleAnimations(Vector3 move)

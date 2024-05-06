@@ -6,87 +6,53 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance; // Singleton instance
 
-    // Make keyItems accessible by other scripts
-    public List<KeyItem> keyItems = new List<KeyItem>(); 
+    // Delegate and event for inventory changes
+    public delegate void InventoryChanged();
+    public event InventoryChanged OnInventoryChanged;
 
-    private List<KeyItem> hotbarItems = new List<KeyItem>(); 
-    public TMP_Text inventoryText;
-    public TMP_Text hotbarText;
-    public int hotbarSize = 5; 
+    private List<KeyItem> keyItems = new List<KeyItem>(); // List of collected key items
 
     void Awake()
     {
         if (instance == null)
         {
-            instance = this; // Set the instance to this object if it doesn't exist
-            DontDestroyOnLoad(gameObject); // Make the object persist between scenes
+            instance = this;
+            DontDestroyOnLoad(gameObject);  // This ensures the inventory persists across scenes
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate instances
+            Destroy(gameObject);
         }
     }
 
+
+    // Method to add a key item to the inventory
     public void AddKeyItem(KeyItem item)
     {
         if (!keyItems.Contains(item))
         {
             keyItems.Add(item);
-            UpdateInventoryText();
+            if (OnInventoryChanged != null) OnInventoryChanged.Invoke();
         }
     }
 
-    public void RemoveKeyItem(KeyItem item)
-    {
-        if (keyItems.Remove(item))
-        {
-            UpdateInventoryText();
-        }
-    }
-
+    // Method to check if a key item is in the inventory
     public bool HasItem(KeyItem item)
     {
         return keyItems.Contains(item);
     }
 
-    public void AddToHotbar(KeyItem item)
+    // Method to remove a key item from the inventory
+    public void RemoveKeyItem(KeyItem item)
     {
-        if (hotbarItems.Count < hotbarSize && !hotbarItems.Contains(item))
-        {
-            hotbarItems.Add(item);
-            UpdateHotbarText();
-        }
+        keyItems.Remove(item);
+        if (OnInventoryChanged != null) OnInventoryChanged.Invoke();
     }
 
-    public void RemoveFromHotbar(KeyItem item)
+    // Method to clear all items from the inventory
+    public void ClearInventory()
     {
-        if (hotbarItems.Remove(item))
-        {
-            UpdateHotbarText();
-        }
-    }
-
-    private void UpdateInventoryText()
-    {
-        if (inventoryText != null) // Check if inventory text is assigned
-        {
-            inventoryText.text = "Inventory:\n";
-            foreach (KeyItem item in keyItems)
-            {
-                inventoryText.text += "- " + item.itemName + "\n";
-            }
-        }
-    }
-
-    private void UpdateHotbarText()
-    {
-        if (hotbarText != null) // Check if hotbar text is assigned
-        {
-            hotbarText.text = "Hotbar:\n";
-            foreach (KeyItem item in hotbarItems)
-            {
-                hotbarText.text += "- " + item.itemName + "\n";
-            }
-        }
+        keyItems.Clear();
+        if (OnInventoryChanged != null) OnInventoryChanged.Invoke();
     }
 }

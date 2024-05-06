@@ -11,57 +11,70 @@ public class HotbarSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void Start()
     {
-        if (tooltipText != null)
-            tooltipText.gameObject.SetActive(false); // Ensure tooltip is initially hidden
+        // Link directly to the singleton instance of Inventory
+        playerInventory = Inventory.instance;
 
-        DontDestroyOnLoad(gameObject); // Make the HotbarSlot object persistent
-
-        SetInitialItem(); // Call the method to set the initial item
+        SetInitialItem();
     }
 
-    private void SetInitialItem()
+    public void SetInitialItem()
     {
         // Check if the associated item exists in the player's inventory
         if (playerInventory != null && playerInventory.HasItem(associatedItem))
         {
-            SetItem(associatedItem); // Set the initial item if it exists in the inventory
+            // Update the item display if it exists in the inventory
+            UpdateItemDisplay();
         }
         else
         {
-            icon.enabled = false; // Hide the icon if the item is not in the inventory
+            Debug.Log("Item not found in inventory or inventory not linked");
+            // Hide the icon if the item is not in the inventory
+            icon.enabled = false;
         }
     }
 
-    public void SetItem(KeyItem item)
+    public void UpdateItemDisplay()
     {
-        associatedItem = item;
-        if (item != null && item.icon != null)
+        // Ensure that the hotbar checks if the item is in the inventory
+        if (playerInventory != null && associatedItem != null)
         {
-            icon.sprite = item.icon; // Set the item's sprite
-            icon.enabled = true; // Make the icon visible
+            if (playerInventory.HasItem(associatedItem))
+            {
+                // Set the item's sprite
+                icon.sprite = associatedItem.icon;
+                // Make the icon visible
+                icon.enabled = true;
+            }
+            else
+            {
+                // Hide the icon if the item is not in the inventory
+                icon.enabled = false;
+            }
         }
         else
         {
-            icon.enabled = false; // Hide the icon if the item is null or lacks an icon
+            // Hide the icon if no associated item or inventory is found
+            icon.enabled = false;
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (associatedItem != null && tooltipText != null && Inventory.instance != null)
+        if (associatedItem != null && tooltipText != null && playerInventory != null)
         {
-            if (Inventory.instance.HasItem(associatedItem))
+            if (playerInventory.HasItem(associatedItem))
             {
-                // Correct reference to 'description' instead of 'itemDescription'
+                // Show the tooltip on hover
                 tooltipText.text = $"{associatedItem.itemName}\n{associatedItem.description}";
-                tooltipText.gameObject.SetActive(true); // Show the tooltip on hover
+                tooltipText.gameObject.SetActive(true);
             }
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        // Hide the tooltip when the pointer exits
         if (tooltipText != null)
-            tooltipText.gameObject.SetActive(false); // Hide the tooltip when the pointer exits
+            tooltipText.gameObject.SetActive(false);
     }
 }

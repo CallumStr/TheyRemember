@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,16 +7,22 @@ public class GameManager : MonoBehaviour
     public GameObject Queen;
     public Transform spawnPoint;
 
+    // Reference to the Inventory script
+    private static Inventory inventoryInstance;
+
     void Start()
     {
+        // Spawn the player first
         SpawnSelectedCharacter();
+
+        // Initialize or retrieve the Inventory instance
+        InitializeInventory();
     }
 
     void SpawnSelectedCharacter()
     {
         GameObject selectedCharacter = null;
 
-        // Check the selected character index and instantiate the character
         switch (CharacterSelection.selectedCharacterIndex)
         {
             case 0:
@@ -45,8 +52,51 @@ public class GameManager : MonoBehaviour
 
         if (selectedCharacter != null)
         {
-            // Additional setup for the instantiated character can go here
             Debug.Log("Character spawned successfully.");
+        }
+    }
+
+    void InitializeInventory()
+    {
+        // Check if the Inventory instance already exists
+        if (inventoryInstance == null)
+        {
+            // Try to find an existing Inventory instance in the scene
+            inventoryInstance = FindObjectOfType<Inventory>();
+
+            // If no existing instance is found, create a new one
+            if (inventoryInstance == null)
+            {
+                GameObject inventoryObject = new GameObject("Inventory");
+                inventoryInstance = inventoryObject.AddComponent<Inventory>();
+                DontDestroyOnLoad(inventoryObject); // Ensure Inventory persists between scenes
+            }
+        }
+        else
+        {
+            // If the Inventory instance already exists, ensure it's not destroyed on scene load
+            DontDestroyOnLoad(inventoryInstance.gameObject);
+        }
+    }
+
+    // Get the reference to the Inventory instance
+    public static Inventory GetInventoryInstance()
+    {
+        return inventoryInstance;
+    }
+
+    // Example method to use the Inventory
+    void ExampleMethod()
+    {
+        Inventory inventory = GetInventoryInstance();
+        if (inventory != null)
+        {
+            // Example usage of Inventory methods
+            inventory.AddKeyItem(new KeyItem());
+        }
+        else
+        {
+            Debug.LogError("Inventory is not initialized.");
         }
     }
 }

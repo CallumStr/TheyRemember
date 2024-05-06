@@ -2,49 +2,54 @@ using UnityEngine;
 
 public class KeyItemPickup : MonoBehaviour
 {
-    public KeyItem keyItem; // Reference to the key item Scriptable Object
-    public HotbarSlot hotbarSlot; // Reference to the HotbarSlot component associated with this key item
+    public KeyItem keyItem; // Reference to the key item associated with this pickup
+    public bool canPickup = false; // Flag to indicate if the player can pick up the key item
 
-    private bool canPickup = false; // Flag to indicate if the player can pick up the item
-    private GameObject player; // Reference to the player GameObject
+    private Inventory playerInventory; // Reference to the player's inventory
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Check if the colliding object is the player
+        if (other.CompareTag("Player"))
         {
-            canPickup = true;
-            player = other.gameObject;
+            canPickup = true; // Set canPickup to true when a player enters the trigger
+            playerInventory = other.GetComponent<Inventory>(); // Cache the player's Inventory component
+            Debug.Log("Player entered trigger zone.");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) // Check if the player exits the trigger zone
+        if (other.CompareTag("Player"))
         {
-            canPickup = false;
-            player = null;
+            canPickup = false; // Set canPickup to false when a player exits the trigger
+            playerInventory = null; // Clear the cached Inventory component
+            Debug.Log("Player exited trigger zone.");
         }
     }
 
     private void Update()
     {
         if (canPickup && Input.GetKeyDown(KeyCode.E))
-        {
-            Inventory playerInventory = player.GetComponent<Inventory>();
-            if (playerInventory != null)
+        {   
+            Debug.Log("E key pressed.");
+            if (playerInventory != null && keyItem != null)
             {
                 playerInventory.AddKeyItem(keyItem); // Add the key item to the player's inventory
-
-                if (hotbarSlot != null && keyItem != null && keyItem.icon != null)
-                {
-                    hotbarSlot.SetItem(keyItem); // Set the key item to the hotbar slot
-                }
-                else
-                {
-                    Debug.LogWarning("Hotbar slot or key item or icon is not properly assigned.");
-                }
-
                 gameObject.SetActive(false); // Deactivate the key item GameObject after picking it up
+
+                // Update hotbar display after picking up the key item
+                HotbarSlot[] hotbarSlots = FindObjectsOfType<HotbarSlot>();
+                foreach (HotbarSlot slot in hotbarSlots)
+                {
+                    slot.UpdateItemDisplay();
+                }
+
+                Debug.Log("Key item picked up.");
+                return; // Exit the loop after the item is picked up by one player
+            }
+            else
+            {
+                Debug.LogWarning("Player inventory or associated item is null. Cannot pick up item.");
             }
         }
     }

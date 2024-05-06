@@ -403,10 +403,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1917040143979378078}
-    - targetCorrespondingSourceObject: {fileID: 5185363778720617127, guid: f173528183fa2334f951292832768a6a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 922602350714110663}
   m_SourcePrefab: {fileID: 100100000, guid: f173528183fa2334f951292832768a6a, type: 3}
 --- !u!1 &3698898153198719828 stripped
 GameObject:
@@ -481,6 +477,9 @@ MonoBehaviour:
     m_Bits: 0
   characterController: {fileID: 9092092080855658459}
   sr: {fileID: 8451302457390026218}
+  inventory: {fileID: 5047907003497268598, guid: 74194b3c1c82aab4cb6f31360c0a1703,
+    type: 3}
+  pickupRange: 2
   gravity: -9.81
 --- !u!143 &9092092080855658459
 CharacterController:
@@ -531,21 +530,6 @@ CapsuleCollider:
   m_Height: 0.71999997
   m_Direction: 1
   m_Center: {x: 0, y: 0.000000029802322, z: 0.00000008940697}
---- !u!114 &922602350714110663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3698898153198719828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 316c9cc88fa817c4c9a7af17d804983e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryText: {fileID: 0}
-  hotbarText: {fileID: 0}
-  hotbarSize: 5
 --- !u!4 &5375970344351817909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4483461163355218246, guid: f173528183fa2334f951292832768a6a,
