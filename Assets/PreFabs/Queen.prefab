@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1258826072435344358}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17362186, y: -0.02078791, z: 0.003682102, w: 0.9845861}
-  m_LocalPosition: {x: 0.056651972, y: 0.48863488, z: -1.3412093}
+  m_LocalPosition: {x: 0.05665194, y: 0.48863488, z: -1.3412093}
   m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 0.14285713}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -227,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 7795861022866448431}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.08234549, z: -0, w: 0.99660385}
-  m_LocalPosition: {x: 6.8009586, y: 9.371, z: 14.094774}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -473,8 +473,7 @@ MonoBehaviour:
     m_Bits: 0
   characterController: {fileID: 9093743788425943847}
   sr: {fileID: 4166624097597926110}
-  slopeForce: 5
-  slopeRayLength: 1.5
+  gravity: -9.81
 --- !u!143 &9093743788425943847
 CharacterController:
   m_ObjectHideFlags: 0
@@ -496,7 +495,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 0.71999997
   m_Radius: 0.20000012
-  m_SlopeLimit: 45
+  m_SlopeLimit: 85.75
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001

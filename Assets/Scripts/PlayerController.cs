@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float groundDist;
+    public float speed = 5f;
+    public float groundDist = 0.1f;
     public LayerMask terrainLayer;
     public CharacterController characterController;
     public SpriteRenderer sr;
@@ -11,90 +11,65 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     private Animator animator;
+    public float gravity = -9.81f; // Gravity force
+    private Vector3 velocity; // to keep track of gravity over time
 
-    // Slope variables
-    public float slopeForce = 10f;
-    public float slopeRayLength = 1.5f;
+    // Reference to the Inventory script
+    private Inventory playerInventory;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
+        // Get the player's inventory instance
+        playerInventory = Inventory.instance;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        RaycastHit hit;
-        Vector3 castPos = transform.position;
-        castPos.y += 1;
-
-        if (Physics.Raycast(castPos, -transform.up, out hit, Mathf.Infinity, terrainLayer))
+        bool isGrounded = characterController.isGrounded;
+        if (isGrounded && velocity.y < 0)
         {
-            if (hit.collider != null)
+            velocity.y = 0f; // reset the y velocity if grounded
+        }
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        move = transform.TransformDirection(move);
+
+        if (!isGrounded)
+        {
+            velocity.y += gravity * Time.deltaTime; // apply gravity
+        }
+        
+        characterController.Move((move * speed + new Vector3(0, velocity.y, 0)) * Time.deltaTime); // apply movement + gravity
+
+        HandleAnimations(move);
+
+        // Log inventory contents when "P" is pressed
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (playerInventory != null)
             {
-                Vector3 movePos = transform.position;
-                movePos.y = hit.point.y + groundDist;
-                transform.position = movePos;
+                Debug.Log("Inventory Contents:");
+                foreach (KeyItem item in playerInventory.GetKeyItems())
+                {
+                    Debug.Log(item.itemName);
+                }
             }
-        }
+    else
+    {
+        Debug.LogWarning("Player inventory is null.");
+    }
+}
+    }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        // Check if moving forward (positively on the Z-axis)
-        bool movingForward = z > 0;
-
-        // Check if moving backward (negatively on the Z-axis)
-        bool movingBackward = z < 0;
-
-        Vector3 moveDir = new Vector3(x, 0, z).normalized;
-
-        // Cast a ray to check the ground slope
-        RaycastHit slopeHit;
-        Physics.Raycast(transform.position, -transform.up, out slopeHit, Mathf.Infinity, terrainLayer);
-
-        // If on a slope, adjust the player's movement based on the slope angle
-        if (slopeHit.collider != null && slopeHit.normal != Vector3.up)
-        {
-            float slopeAngle = Vector3.Angle(Vector3.up, slopeHit.normal);
-
-            // Apply consistent downward force to move downwards on slopes
-            Vector3 slopeMove = Vector3.down * slopeForce;
-            characterController.Move(slopeMove * Time.deltaTime);
-        }
-
-        characterController.Move(moveDir * speed * Time.deltaTime);
-
-        animator.SetFloat("Speed", Mathf.Abs(characterController.velocity.x));
-
-        // Flip the sprite when moving left
-        if (x < 0)
-        {
-            sr.flipX = true;
-        }
-        // Flip the sprite when moving right
-        else if (x > 0)
-        {
-            sr.flipX = false;
-        }
-
-        // Set conditions for moving forward and backward animations
-        animator.SetBool("MovingForward", movingForward);
-        animator.SetBool("MovingBackward", movingBackward);
+    private void HandleAnimations(Vector3 move)
+    {
+        // Animation handling logic here
+        animator.SetFloat("Speed", characterController.velocity.magnitude);
+        sr.flipX = move.x < 0;
+        animator.SetBool("MovingForward", move.z > 0);
+        animator.SetBool("MovingBackward", move.z < 0);
     }
 }
