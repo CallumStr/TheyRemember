@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wine
   m_EditorClassIdentifier: 
   itemName: 'Wine '
-  description: winwinwin
+  description: An antique bottle of wine
   icon: {fileID: 21300000, guid: 78b0573c8b181f647b23fb12ab689202, type: 3}
   isConsumable: 0
   isStoryItem: 1

@@ -92,16 +92,9 @@ public class NPC : MonoBehaviour
             {
                 npcDialogues["NPC2"] = new string[]
                 {
-                    "Your Highness, I think your consort is looking for you",
+                    "With all the lands in Rúinhaven secured we may now begin to bring order to a restless people",
                 };
             }
-            //else
-            //{
-            // npcDialogues["NPC2"] = new string[] //the text was scrolling too slowly
-            // {
-            //"With all the lands in Rúinhaven secured we may now begin to bring order to a restless people",
-            // };
-            //}
         }
         if (gameObject.name == "NPC3")
         {
@@ -166,7 +159,7 @@ public class NPC : MonoBehaviour
             {
                 npcDialogues["NPC7"] = new string[]
                 {
-                    "Strumming a tune on his lute",
+                    "*Strumming a tune on his lute*",
                 };
             }
         }
