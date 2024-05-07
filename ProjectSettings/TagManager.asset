@@ -7,6 +7,8 @@ TagManager:
   - Queen
   - King
   - KeyItem
+  - Fire
+  - TorchTag
   layers:
   - Default
   - TransparentFX
