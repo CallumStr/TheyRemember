@@ -35,10 +35,15 @@ public class OverlayFade : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < fadeDuration)
         {
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            // Use cubic easing function to interpolate alpha value
+            float t = elapsedTime / fadeDuration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+            float alpha = Mathf.Lerp(1f, 0f, t);
+
             Color newColor = originalColor;
             newColor.a = alpha;
             overlayRenderer.material.color = newColor;
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
