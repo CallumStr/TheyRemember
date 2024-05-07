@@ -7,12 +7,15 @@ public class PlayerController : MonoBehaviour
     public LayerMask terrainLayer;
     public CharacterController characterController;
     public SpriteRenderer sr;
-
+    public AudioClip[] footstepSounds; // Footstep sounds array
+    private AudioSource audioSource; // Audio source component
     public static PlayerController instance;
 
     private Animator animator;
     public float gravity = -9.81f; // Gravity force
-    private Vector3 velocity; // to keep track of gravity over time
+    private Vector3 velocity; // Track gravity over time
+
+    private bool isMoving; // Boolean to track if the character is moving
 
     // Reference to the Inventory script
     private Inventory playerInventory;
@@ -21,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         // Get the player's inventory instance
         playerInventory = Inventory.instance;
@@ -31,20 +35,29 @@ public class PlayerController : MonoBehaviour
         bool isGrounded = characterController.isGrounded;
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = 0f; // reset the y velocity if grounded
+            velocity.y = 0f; // Reset the y velocity if grounded
         }
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         move = transform.TransformDirection(move);
 
+        // Determine if the player is moving based on the magnitude of the move vector
+        isMoving = move.magnitude > 0.1f; // Set true if moving
+
         if (!isGrounded)
         {
-            velocity.y += gravity * Time.deltaTime; // apply gravity
+            velocity.y += gravity * Time.deltaTime; // Apply gravity when not grounded
         }
-        
-        characterController.Move((move * speed + new Vector3(0, velocity.y, 0)) * Time.deltaTime); // apply movement + gravity
+
+        characterController.Move((move * speed + new Vector3(0, velocity.y, 0)) * Time.deltaTime); // Apply movement + gravity
 
         HandleAnimations(move);
+
+        // Play footstep sound if character is moving
+        if (isMoving)
+        {
+            PlayFootstepSound();
+        }
 
         // Log inventory contents when "P" is pressed
         if (Input.GetKeyDown(KeyCode.P))
@@ -57,19 +70,28 @@ public class PlayerController : MonoBehaviour
                     Debug.Log(item.itemName);
                 }
             }
-    else
-    {
-        Debug.LogWarning("Player inventory is null.");
-    }
-}
+            else
+            {
+                Debug.LogWarning("Player inventory is null.");
+            }
+        }
     }
 
     private void HandleAnimations(Vector3 move)
     {
-        // Animation handling logic here
         animator.SetFloat("Speed", characterController.velocity.magnitude);
         sr.flipX = move.x < 0;
         animator.SetBool("MovingForward", move.z > 0);
         animator.SetBool("MovingBackward", move.z < 0);
+    }
+
+    private void PlayFootstepSound()
+    {
+        if (!audioSource.isPlaying && footstepSounds.Length > 0)
+        {
+            // Play footstep sounds when the player moves
+            audioSource.clip = footstepSounds[Random.Range(0, footstepSounds.Length)];
+            audioSource.Play();
+        }
     }
 }

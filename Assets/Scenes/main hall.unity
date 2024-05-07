@@ -7935,6 +7935,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 942113940}
     m_Modifications:
+    - target: {fileID: -7183892106637718971, guid: 2b5f6b76f1ed47f4f8bc90c9aff3184b,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1821300323071963912, guid: 2b5f6b76f1ed47f4f8bc90c9aff3184b,
         type: 3}
       propertyPath: m_Name
@@ -9765,8 +9770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79061d15739778945afc8179f10a5224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionsSceneIndex: 10
-  defaultSceneIndex: 0
   resolutionDropdown: {fileID: 0}
 --- !u!114 &736303269
 MonoBehaviour:
@@ -28085,3 +28088,4 @@ SceneRoots:
   - {fileID: 1718078573}
   - {fileID: 163587519}
   - {fileID: 57099203}
+  - {fileID: 650652024}
